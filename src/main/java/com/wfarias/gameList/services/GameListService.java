@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wfarias.gameList.dto.GameListDTO;
+import com.wfarias.gameList.entities.GameList;
 import com.wfarias.gameList.repositories.GameListRepository;
 
 
@@ -18,7 +19,7 @@ public class GameListService {
 	
 	@Transactional(readOnly = true)
 	public List<GameListDTO> findall(){
-		var result = gameListRepository.findAll();
+		List<GameList> result = gameListRepository.findAll();
 		return result.stream().map(x -> new GameListDTO(x)).toList();
 
 	}

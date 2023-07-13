@@ -1,6 +1,7 @@
 package com.wfarias.gameList.services;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wfarias.gameList.dto.GameDTO;
 import com.wfarias.gameList.dto.GameMinDTO;
 import com.wfarias.gameList.entities.Game;
+import com.wfarias.gameList.projection.GameMinProjection;
 import com.wfarias.gameList.repositories.GameRepository;
 
 
@@ -31,7 +33,7 @@ public class GameService {
 	
 	@Transactional(readOnly = true)
 	public List<GameMinDTO> findbyList(Long listId){
-		var result = gameRepository.searchByList(listId);
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
 		return result.stream().map(x -> new GameMinDTO(x)).toList();
 		
 	}
